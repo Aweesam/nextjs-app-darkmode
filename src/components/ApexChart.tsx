@@ -1,5 +1,6 @@
 'use client'
 
+import styles from '@/app/page.module.css';
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
@@ -156,7 +157,8 @@ var options = {
 }],
   chart: {
   type: 'candlestick',
-  height: 290,
+  height: 500,
+  width: 500,
   id: 'candles',
   toolbar: {
     autoSelected: 'pan',
@@ -182,72 +184,28 @@ xaxis: {
 
 
 var optionsBar = {
-  series: [{
-  name: 'volume',
-  data: seriesDataLinear
-}],
   chart: {
-  height: 160,
-  type: 'bar',
-  brush: {
-    enabled: true,
-    target: 'candles'
+    type: 'bar',
+    height: 500, 
+    width: 500,
   },
-  selection: {
-    enabled: true,
-    xaxis: {
-      min: new Date('20 Jan 2017').getTime(),
-      max: new Date('10 Dec 2017').getTime()
-    },
-    fill: {
-      color: '#ccc',
-      opacity: 0.4
-    },
-    stroke: {
-      color: '#0D47A1',
+  series: [
+    {
+      name: 'sales',
+      data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
     }
-  },
-},
-dataLabels: {
-  enabled: false
-},
-plotOptions: {
-  bar: {
-    columnWidth: '80%',
-    colors: {
-      ranges: [{
-        from: -1000,
-        to: 0,
-        color: '#F15B46'
-      }, {
-        from: 1,
-        to: 10000,
-        color: '#FEB019'
-      }],
-
-    },
-  }
-},
-stroke: {
-  width: 0
-},
-xaxis: {
-  type: 'datetime',
-  axisBorder: {
-    offsetX: 13
-  }
-},
-yaxis: {
-  labels: {
-    show: false
+  ],
+  xaxis: {
+    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
   }
 }
-};
+
+
 
 if (document.querySelector("#chart-candlestick") && document.querySelector("#chart-bar")) {
   var chart = new ApexCharts(document.querySelector("#chart-candlestick"), options);
   chart.render();
-var chartBar = new ApexCharts(document.querySelector("#chart-bar"), optionsBar);
+  var chartBar = new ApexCharts(document.querySelector('#chart-bar'), optionsBar)
 chartBar.render();
 }
 return () => {
@@ -262,9 +220,11 @@ return () => {
     
   return (
 
-    <div>
-    <div id="chart-candlestick"></div>
-    <div id="chart-bar"></div></div>
+    <div className={styles.grid}>
+      <div className="margin-30">
+    <div className="" id="chart-candlestick"></div>
+    </div>
+    <div className="" id="chart-bar"></div></div>
   );
  }
  export default ApexChart;
