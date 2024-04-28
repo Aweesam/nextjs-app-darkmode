@@ -2,6 +2,10 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import dynamic from 'next/dynamic';
 import LoadingThemeButton from '@/components/LoadingThemeButton';
+// Import the ApexChart component with SSR disabled
+const ApexChart = dynamic(() => import('@/components/ApexChart'), {
+  ssr: false  // This will only render the component on the client-side
+});
 
 const SetThemeButton = dynamic(() => import('@/components/SetThemeButton'), {
   ssr: false,
@@ -18,21 +22,9 @@ export default function Home() {
             <code className={styles.code}>src/app/page.tsx</code>
           </p>
           <div>
-            <a
-              href='https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              By{' '}
-              <Image
-                src='/vercel.svg'
-                alt='Vercel Logo'
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+        
+              <ApexChart />
+         
           </div>
         </div>
         <SetThemeButton />
